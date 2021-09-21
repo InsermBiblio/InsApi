@@ -1,4 +1,4 @@
-version: "2"
+version: "3.5"
 
 services:
   postgres-prod:
@@ -11,8 +11,10 @@ services:
     volumes:
       - ./backups:/backups
       - /applis/insapi/home/postgresql:/var/lib/postgresql/data
-
-  server:
+    networks:
+      - insbackend
+  
+  ins-server:
     image: vsnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:${insapi_version}
     volumes:
       - ./logs:/app/logs
@@ -31,9 +33,16 @@ services:
       POSTGRES_HOST: postgres-prod
       MAIL_SERVER_HOST: ${MAIL_SERVER_HOST}
       MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
-    links:
-      - postgres-prod
     ports:
       - 3000:3000
     restart: always
     command: node launcher.js
+    networks:
+      - insbackend
+      - insfrontend
+
+networks:
+  insbackend:
+    external: true
+  insfrontend:
+    external: true
