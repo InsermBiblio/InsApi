@@ -40,7 +40,7 @@ run-prod: ## run project in production mode
 test: install test2
 
 test2: ## run test
-	docker-compose -f docker-compose.test.yml run --rm server
+	docker-compose -f docker-compose.test.yml run --rm ins-server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
@@ -93,9 +93,9 @@ stop: ## stop all insapi docker image
 
 build: ## args: <version> build insermbiblio/insapi:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:$(COMMAND_ARGS)' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:$(COMMAND_ARGS)' .
 else
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:latest' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:latest' .
 endif
 
 update: stop cleanup-docker install build

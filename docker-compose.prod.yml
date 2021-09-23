@@ -15,7 +15,7 @@ services:
       - insbackend
   
   ins-server:
-    image: vsnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:${insapi_version}
+    image: vxnexus-registry.intra.inist.fr:8083/insermbiblio/insapi:${insapi_version}
     volumes:
       - ./logs:/app/logs
       - ./imports:/app/imports

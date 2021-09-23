@@ -32,7 +32,6 @@ services:
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/models/*.js
     networks:
       - insbackend
-      - insfrontend
               
   maildev-test:
     image: djfarrelly/maildev
@@ -42,7 +41,5 @@ services:
       - insbackend
 
 networks:
-  backend:
-    external: true
-  frontend:
+  insbackend:
     external: true

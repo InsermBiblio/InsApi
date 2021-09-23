@@ -11,7 +11,8 @@ services:
       https_proxy: ${https_proxy}
       no_proxy: "localhost,127.0.0.1,"
     entrypoint: ["npm"]
-
+    networks:
+      - insbackend
   server:
     image: node:8.12.0
     volumes:
@@ -20,3 +21,10 @@ services:
     ports:
       - 3000:3000
     command: node launcher.js
+    networks:
+      - insbackend
+
+networks:
+  insbackend:
+    driver: bridge
+    name : insbackend
